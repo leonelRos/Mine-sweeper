@@ -20,8 +20,8 @@ export default class Board extends Component {
   getMines(data) {
     let mineArray = [];
 
-    data.map(datarow => {
-      datarow.map(dataitem => {
+    data.forEach(datarow => {
+      datarow.forEach(dataitem => {
         if (dataitem.isMine) {
           mineArray.push(dataitem);
         }
@@ -35,8 +35,8 @@ export default class Board extends Component {
   getFlags(data) {
     let mineArray = [];
 
-    data.map(datarow => {
-      datarow.map(dataitem => {
+    data.forEach(datarow => {
+      datarow.forEach(dataitem => {
         if (dataitem.isFlagged) {
           mineArray.push(dataitem);
         }
@@ -50,8 +50,8 @@ export default class Board extends Component {
   getHidden(data) {
     let mineArray = [];
 
-    data.map(datarow => {
-      datarow.map(dataitem => {
+    data.forEach(datarow => {
+      datarow.forEach(dataitem => {
         if (!dataitem.isRevealed) {
           mineArray.push(dataitem);
         }
@@ -115,15 +115,15 @@ export default class Board extends Component {
 
   // get number of neighbouring mines for each board cell
   getNeighbours(data, height, width) {
-    let updatedData = data,
-      index = 0;
+    let updatedData = data
+    //   index = 0;
 
     for (let i = 0; i < height; i++) {
       for (let j = 0; j < width; j++) {
         if (data[i][j].isMine !== true) {
           let mine = 0;
           const area = this.traverseBoard(data[i][j].x, data[i][j].y, data);
-          area.map(value => {
+          area.forEach(value => {
             if (value.isMine) {
               mine++;
             }
@@ -189,8 +189,8 @@ export default class Board extends Component {
   // reveals the whole board
   revealBoard() {
     let updatedData = this.state.boardData;
-    updatedData.map(datarow => {
-      datarow.map(dataitem => {
+    updatedData.forEach(datarow => {
+      datarow.forEach(dataitem => {
         dataitem.isRevealed = true;
       });
     });
@@ -202,7 +202,7 @@ export default class Board extends Component {
   /* reveal logic for empty cell */
   revealEmpty(x, y, data) {
     let area = this.traverseBoard(x, y, data);
-    area.map(value => {
+    area.forEach(value => {
       if (
         !value.isFlagged &&
         !value.isRevealed &&
@@ -229,9 +229,9 @@ export default class Board extends Component {
 
     // check if mine. game over if true
     if (this.state.boardData[x][y].isMine) {
-      this.setState({ gameStatus: "You Lost." });
+      this.setState({ gameStatus: "You Lost, Try Again" });
       this.revealBoard();
-      alert("game over");
+      alert("Sucks to lose, refresh and try again");
     }
 
     let updatedData = this.state.boardData;

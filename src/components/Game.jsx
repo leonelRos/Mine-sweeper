@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Board from './Board'
+import '../style.scss'
 
 class Game extends Component {
     state = {  
@@ -16,6 +17,7 @@ class Game extends Component {
                 width={width}
                 mines={mines}
                 />
+                <button >Start Over</button>
             </div>
          );
     }

@@ -24,10 +24,7 @@ startOver() {
                 mines={mines}
                 />
                 <button onClick={this.startOver} className="restart">Start Over</button>
-            </div>
-            
-
-        
+            </div>        
          );
     }
 }
